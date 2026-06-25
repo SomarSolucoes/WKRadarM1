@@ -1,0 +1,457 @@
+Metadata-Version: 2.4
+Name: WKRadarM1
+Version: 1.0.0
+Summary: Biblioteca para integração com a API do WK Radar (Módulo 1)
+Author: WK Radar Integration Team
+Keywords: wk radar api erp integration
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: requests>=2.25.0
+Dynamic: author
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: keywords
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# WKRadarM1 - Biblioteca de Integração WK Radar
+
+A `WKRadarM1` é uma biblioteca Python profissional projetada para simplificar a integração com a API do WK Radar. Ela abstrai a complexidade das chamadas HTTP, autenticação e tratamento de erros, oferecendo métodos intuitivos em Português (PTBR) com suporte total a IntelliSense.
+
+## 🚀 Instalação
+
+Você pode instalar a biblioteca diretamente do diretório local (enquanto em desenvolvimento) ou via PyPI após a publicação:
+
+```bash
+# Instalação local (modo editável)
+cd WKRadarM1
+pip install -e .
+
+# Instalação via PyPI (após publicação)
+pip install WKRadarM1
+```
+
+## 🛠️ Guia de Uso Rápido
+
+```python
+from WKRadarM1 import WKRadarClient
+
+# 1. Inicialização do Cliente
+client = WKRadarClient(
+    base_url="https://sua-api-wk.com.br/wk.api/",
+    empresa="SUA_EMPRESA",
+    username="seu_usuario",
+    password="sua_senha"
+)
+
+# 2. Busca de Clientes com Filtros e Data Shaping
+# O IDE sugerirá automaticamente os argumentos abaixo!
+clientes = client.empresarial.buscar_clientes(
+    Situacao="Ativo",
+    Fields=["Id", "Nome", "CpfCnpj"]
+)
+
+for cliente in clientes:
+    print(f"ID: {cliente['Id']} - CPF/CNPJ: {cliente['CpfCnpj']}")
+```
+
+## 📦 Estrutura de Módulos e Cobertura
+
+A biblioteca cobre **100% das rotas (325 métodos)** do WK Radar, divididas nos seguintes módulos:
+
+| Módulo | Descrição Principal | Métodos |
+| :--- | :--- | :--- |
+| **Comercial** | Pedidos, Notas Fiscais, Fluxos e Processos | 14 |
+| **Financeiro** | Títulos, Baixas, Tesouraria e Adiantamentos | 37 |
+| **Empresarial** | Clientes, Produtos, Fornecedores e Importação | 123 |
+| **Folha** | Empregados, Afastamentos e Admissões | 50 |
+| **Produção** | Ordens de Produção e Apontamentos | 42 |
+| **Compras** | Ordens de Compra e Cotações | 9 |
+| **Gerenciador** | Contratos, Equipamentos e Projetos | 34 |
+| **Estoque** | Movimentação e Locais de Armazenagem | 8 |
+| **Contábil** | Lançamentos e Plano de Contas | 5 |
+| **TOTAL** | **Cobertura Total da API WK Radar** | **325** |
+
+## 📚 Referência Completa de Métodos
+
+Abaixo estão listados todos os 325 métodos disponíveis na biblioteca, organizados por módulo.
+
+### Módulo Comercial (`client.comercial`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `leitura_do_acompanhamento_de_pedidos_fluxos()` | Leitura do Acompanhamento de Pedidos - Fluxos pelo ID |
+| `buscar_acompanhamento_de_pedidos_fluxos()` | Busca de Acompanhamento de Pedidos - Fluxos |
+| `leitura_do_acompanhamento_de_pedidos_processos()` | Leitura do Acompanhamento de Pedidos - Processos pelo ID |
+| `buscar_acompanhamento_de_pedidos_processos()` | Busca de Acompanhamento de Pedidos - Processos |
+| `leitura_do_acompanhamento_de_pedidos_situacoes()` | Leitura do Acompanhamento de Pedidos - Situações pelo ID |
+| `buscar_acompanhamento_de_pedidos_situacoes()` | Busca de Acompanhamento de Pedidos - Situações |
+| `criar_notas_fiscais()` | Gravação de Notas Fiscais |
+| `buscar_notas_fiscais()` | Busca de Notas Fiscais |
+| `obter_notas_fiscais()` | Leitura de Notas Fiscais pelo ID |
+| `criar_pedidos()` | Gravação de Pedidos |
+| `buscar_pedidos()` | Busca de Pedidos |
+| `pre_calculo_de_pedidos()` | Pré-Cálculo de Pedidos |
+| `obter_pedidos()` | Leitura de Pedidos pelo ID |
+| `cancelamento_de_pedidos()` | Cancelamento de Pedidos pelo ID |
+| `alteracao_de_apontamentos_de_acompanhamentos_de_pedidos()` | Alteração de Apontamentos de Acompanhamentos de Pedidos |
+
+
+### Módulo Compras (`client.compras`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `criar_cotacoes()` | Gravação de Cotações |
+| `buscar_cotacoes()` | Busca de Cotações |
+| `obter_cotacoes()` | Leitura de Cotações pelo ID |
+| `excluir_cotacao()` | Exclusão de Cotação pelo ID |
+| `criar_ordens_de_compra()` | Gravação de Ordens de Compra |
+| `buscar_ordens_de_compra()` | Busca de Ordens de Compra |
+| `obter_ordens_de_compra()` | Leitura de Ordens de Compra pelo ID |
+| `excluir_ordem_de_compra()` | Exclusão de Ordem de Compra pelo ID |
+| `cancela_a_ordem_de_compra()` | Cancela a Ordem de Compra pelo ID |
+| `desfaz_o_cancelamento_da_ordem_de_compra()` | Desfaz o cancelamento da Ordem de Compra pelo ID |
+| `obter_pre_registro_de_notas()` | Leitura de Pré-registro de Notas pelo ID |
+| `buscar_pre_registros_de_notas()` | Busca de Pré-registros de Notas |
+| `criar_registros_de_entrada()` | Gravação de registros de entrada |
+| `buscar_registros_de_entrada()` | Busca de Registros de Entrada |
+| `obter_registros_de_entrada()` | Leitura de Registros de Entrada pelo ID |
+
+
+### Módulo Contabil (`client.contabil`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `obter_lancamentos_contabeis()` | Leitura de Lançamentos Contábeis pelo ID |
+| `atualizar_lancamento_contabil()` | Atualização de Lançamento Contábil |
+| `excluir_lancamento_contabil()` | Exclusão de Lançamento Contábil |
+| `busca_dos_lancamentos_contabeis()` | Busca dos Lançamentos Contábeis |
+| `criar_lancamentos_contabeis()` | Gravação de Lançamentos Contábeis |
+
+
+### Módulo Empresarial (`client.empresarial`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `leitura_do_cadastro_de_info_plus()` | Leitura do cadastro de Info Plus pelo ID |
+| `busca_do_cadastro_de_info_plus()` | Busca do cadastro de Info Plus |
+| `leitura_do_cadastro_de_categorias_de_cfrt()` | Leitura do cadastro de Categorias de CFRT pelo ID |
+| `busca_do_cadastro_de_categorias_de_cfrt()` | Busca do cadastro de Categorias de CFRT |
+| `leitura_do_cadastro_de_categorias_de_produto()` | Leitura do cadastro de Categorias de Produto pelo ID |
+| `busca_do_cadastro_de_categorias_de_produto()` | Busca do cadastro de Categorias de Produto |
+| `criar_clientes()` | Gravação de Clientes |
+| `buscar_clientes()` | Busca de Clientes |
+| `obter_cliente()` | Leitura de Cliente pelo ID |
+| `obter_comprador()` | Leitura de Comprador pelo ID |
+| `buscar_compradores()` | Busca de Compradores |
+| `obter_condicao_de_pagamento()` | Leitura de Condição de Pagamento pelo ID |
+| `buscar_condicoes_de_pagamento()` | Busca de Condições de Pagamento |
+| `obter_contato()` | Leitura de Contato pelo ID |
+| `buscar_contatos()` | Busca de Contatos |
+| `obter_departamento()` | Leitura de Departamento pelo ID |
+| `buscar_departamentos()` | Busca de Departamentos |
+| `obter_documento()` | Leitura de Documento pelo ID |
+| `buscar_documentos()` | Busca de Documentos |
+| `criar_estados()` | Gravação de Estados |
+| `buscar_estados()` | Busca de Estados |
+| `obter_estado()` | Leitura de Estado pelo ID |
+| `atualizar_estado()` | Atualização de Estado |
+| `obter_empresa_filial()` | Leitura de Empresa/Filial pelo ID |
+| `buscar_empresas_filiais()` | Busca de Empresas/Filiais |
+| `obter_forma_de_pagamento()` | Leitura de Forma de Pagamento pelo ID |
+| `buscar_formas_de_pagamento()` | Busca de Formas de Pagamento |
+| `obter_fornecedor()` | Leitura de Fornecedor pelo ID |
+| `buscar_fornecedores()` | Busca de Fornecedores |
+| `obter_grade()` | Leitura de Grade pelo ID |
+| `buscar_grades()` | Busca de Grades |
+| `obter_grade_contabil()` | Leitura de grade contábil pelo ID |
+| `buscar_grades_contabeis()` | Busca de grades contábeis |
+| `obter_grupo_de_natureza_efd_reinf()` | Leitura de Grupo de Natureza EFD Reinf pelo ID |
+| `buscar_grupos_de_naturezas_efd_reinf()` | Busca de Grupos de Naturezas EFD Reinf |
+| `obter_grupo_de_recurso()` | Leitura de Grupo de Recurso pelo ID |
+| `buscar_grupos_de_recursos()` | Busca de Grupos de Recursos |
+| `criar_historicos()` | Gravação de históricos |
+| `buscar_historicos()` | Busca de Históricos |
+| `obter_historico()` | Leitura de Histórico pelo ID |
+| `importacao_de_cadastros_por()` | Importação de cadastros por API |
+| `buscar_importacoes()` | Busca de Importações API |
+| `obter_importacao()` | Leitura de Importação API pelo ID |
+| `criar_indices()` | Gravação de índices |
+| `buscar_indices()` | Busca de Índices |
+| `obter_indice()` | Leitura de Índice pelo ID |
+| `atualizar_indice()` | Atualização de índice |
+| `leitura_do_cadastro_de_informacoes_bancarias_do_tipo_conta_bancaria()` | Leitura do cadastro de Informações Bancárias do tipo Conta Bancária pelo ID |
+| `busca_do_cadastro_de_informacoes_bancarias_do_tipo_conta_bancaria()` | Busca do cadastro de Informações Bancárias do tipo Conta Bancária |
+| `leitura_do_cadastro_de_informacoes_bancarias_do_tipo_pix()` | Leitura do cadastro de Informações Bancárias do tipo Pix pelo ID |
+| `busca_do_cadastro_de_informacoes_bancarias_do_tipo_pix()` | Busca do cadastro de Informações Bancárias do tipo Pix |
+| `leitura_do_cadastro_de_informacoes_complementares()` | Leitura do cadastro de Informações Complementares pelo ID |
+| `busca_do_cadastro_de_informacoes_complementares()` | Busca do cadastro de Informações Complementares |
+| `obter_itens_de_uma_grade()` | Leitura de Itens de uma Grade |
+| `obter_itens_de_grade_relacionados_a_um_produto()` | Leitura de Itens de Grade relacionados a um Produto |
+| `criar_mensagens()` | Gravação de Mensagens |
+| `buscar_mensagens()` | Busca de Mensagens |
+| `obter_mensagem()` | Leitura de Mensagem pelo ID |
+| `atualizar_mensagem()` | Atualização de Mensagem |
+| `obter_motorista()` | Leitura de Motorista pelo ID |
+| `buscar_motoristas()` | Busca de Motoristas |
+| `criar_municipios()` | Gravação de Municípios |
+| `buscar_municipios()` | Busca de Municípios |
+| `obter_municipio()` | Leitura de Município pelo ID |
+| `atualizar_municipio()` | Atualização de Município |
+| `obter_natureza_efd_reinf()` | Leitura de Natureza EFD Reinf pelo ID |
+| `buscar_naturezas_efd_reinf()` | Busca de Naturezas EFD Reinf |
+| `obter_natureza_de_operacao()` | Leitura de Natureza De Operação pelo ID |
+| `buscar_naturezas_de_operacao()` | Busca de Naturezas De Operação |
+| `obter_operacao_comercial()` | Leitura de Operação Comercial pelo ID |
+| `buscar_operacoes_comerciais()` | Busca de Operações Comerciais |
+| `criar_pessoas()` | Gravação de Pessoas |
+| `buscar_pessoas()` | Busca de Pessoas |
+| `obter_pessoa()` | Leitura de Pessoa pelo ID |
+| `obter_plano_de_conta_contabil()` | Leitura de Plano de Conta Contábil pelo ID |
+| `buscar_planos_de_conta_contabil()` | Busca de Planos de Conta Contábil |
+| `obter_plano_de_conta_gerencial()` | Leitura de Plano de Conta Gerencial pelo ID |
+| `buscar_planos_de_conta_gerencial()` | Busca de Planos de Conta Gerencial |
+| `obter_portador()` | Leitura de Portador pelo ID |
+| `buscar_portadores()` | Busca de Portadores |
+| `obter_produto()` | Leitura de Produto pelo ID |
+| `buscar_produtos()` | Busca de Produtos |
+| `obter_recurso()` | Leitura de Recurso pelo ID |
+| `buscar_recursos()` | Busca de Recursos |
+| `obter_representante()` | Leitura de Representante pelo ID |
+| `buscar_representantes()` | Busca de Representantes |
+| `leitura_do_cadastro_de_requisitantes()` | Leitura do cadastro de Requisitantes pelo ID |
+| `busca_do_cadastro_de_requisitantes()` | Busca do cadastro de Requisitantes |
+| `obter_servico()` | Leitura de Serviço pelo ID |
+| `buscar_servicos()` | Busca de Serviços |
+| `obter_tabela_de_preco_de_venda_de_produto()` | Leitura de Tabela de Preço de Venda de Produto pelo ID |
+| `buscar_tabelas_de_preco_de_venda_de_produto()` | Busca de Tabelas de Preço de Venda de Produto |
+| `obter_tabela_de_preco_de_venda_de_servico()` | Leitura de Tabela de Preço de Venda de Serviço pelo ID |
+| `buscar_tabelas_de_preco_de_venda_de_servico()` | Busca de Tabelas de Preço de Venda de Serviço |
+| `criar_tipos_de_cobranca()` | Gravação de Tipos de Cobrança |
+| `buscar_tipos_de_cobranca()` | Busca de Tipos de Cobrança |
+| `obter_tipo_de_cobranca()` | Leitura de Tipo de Cobrança pelo ID |
+| `obter_tipo_de_periodo()` | Leitura de Tipo de Período pelo ID |
+| `buscar_tipos_de_periodo()` | Busca de Tipos de Período |
+| `obter_tipo_de_recolhimento()` | Leitura de Tipo de Recolhimento pelo ID |
+| `buscar_tipos_de_recolhimento()` | Busca de Tipos de Recolhimento |
+| `obter_tipo_de_recurso()` | Leitura de Tipo de Recurso pelo ID |
+| `buscar_tipos_de_recurso()` | Busca de Tipos de Recurso |
+| `obter_tipo_de_vencimento()` | Leitura de Tipo de Vencimento pelo ID |
+| `buscar_tipos_de_vencimentos()` | Busca de Tipos de Vencimentos |
+| `obter_transportadora()` | Leitura de Transportadora pelo ID |
+| `buscar_transportadoras()` | Busca de Transportadoras |
+| `obter_unidades_logisticas()` | Leitura de Unidades Logísticas pelo ID |
+| `buscar_unidades_logisticas()` | Busca de Unidades Logísticas |
+| `obter_unidade_de_medida()` | Leitura de Unidade de Medida pelo ID |
+| `buscar_unidades_de_medida()` | Busca de Unidades de Medida |
+| `obter_unidade_de_medida_2()` | Leitura de Unidade de Medida pelo ID |
+| `buscar_unidades_de_medida_2()` | Busca de Unidades de Medida |
+| `obter_usuario()` | Leitura de Usuário pelo ID |
+| `buscar_usuarios()` | Busca de Usuários |
+| `obter_veiculo()` | Leitura de Veículo pelo ID |
+| `buscar_veiculos()` | Busca de Veículos |
+| `obter_vendedor()` | Leitura de Vendedor pelo ID |
+| `buscar_vendedores()` | Busca de Vendedores |
+
+
+### Módulo Estoque (`client.estoque`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `obter_local_de_armazenagem()` | Leitura de Local de Armazenagem pelo ID |
+| `buscar_locais_de_armazenagem()` | Busca de Locais de Armazenagem |
+| `criar_movimentos_de_estoque_transferencia_entre_locais()` | Gravação de Movimentos de Estoque - Transferência entre Locais |
+| `criar_movimentos_de_estoque_saida()` | Gravação de Movimentos de Estoque - Saída |
+| `criar_movimentos_de_estoque_entrada()` | Gravação de Movimentos de Estoque - Entrada |
+| `criar_movimentos_de_estoque_ajuste_automatico_de_inventario()` | Gravação de Movimentos de Estoque - Ajuste Automático de Inventário |
+| `obter_movimento_de_estoque()` | Leitura de Movimento de Estoque pelo ID |
+| `buscar_movimentos_de_estoque()` | Busca de Movimentos de Estoque |
+
+
+### Módulo Financeiro (`client.financeiro`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `obter_adiantamento()` | Leitura de Adiantamento pelo ID |
+| `buscar_adiantamentos()` | Busca de Adiantamentos |
+| `criar_baixas_de_contas_a_pagar()` | Gravação de Baixas de Contas a Pagar |
+| `buscar_baixas_de_contas_a_pagar()` | Busca de Baixas de Contas a Pagar |
+| `obter_baixa_de_contas_a_pagar()` | Leitura de Baixa de Contas a Pagar pelo ID |
+| `excluir_baixa_de_contas_a_pagar()` | Exclusão de Baixa de Contas a Pagar pelo ID |
+| `criar_baixas_de_substituicao_de_titulos_de_contas_a_pagar()` | Gravação de Baixas de Substituição de títulos de Contas a Pagar |
+| `criar_baixas_de_contas_a_receber()` | Gravação de Baixas de Contas a Receber |
+| `buscar_baixas_de_contas_a_receber()` | Busca de Baixas de Contas a Receber |
+| `obter_baixa_de_contas_a_receber()` | Leitura de Baixa de Contas a Receber pelo ID |
+| `excluir_baixa_de_contas_a_receber()` | Exclusão de Baixa de Contas a Receber pelo ID |
+| `criar_baixas_de_substituicao_de_titulos_de_contas_a_receber()` | Gravação de Baixas de Substituição de títulos de Contas a Receber |
+| `obter_carteira_de_cobranca()` | Leitura de Carteira de Cobrança pelo ID |
+| `buscar_carteiras_de_cobranca()` | Busca de Carteiras de Cobrança |
+| `obter_categoria_de_adiantamento()` | Leitura de Categoria de Adiantamento pelo ID |
+| `buscar_categorias_de_adiantamento()` | Busca de Categorias de Adiantamento |
+| `criar_cobranca()` | Gravação de Cobrança |
+| `consulta_boleto_de_cobranca__do_titulo()` | Consulta boleto de Cobrança pelo ID do Título. |
+| `cancelamento_de_boleto_de_cobranca_online__do_titulo()` | Cancelamento de boleto de Cobrança Online pelo ID do Título |
+| `obter_instrucao_bancaria()` | Leitura de Instrução Bancária pelo ID |
+| `buscar_instrucoes_bancarias()` | Busca de Instruções Bancárias |
+| `criar_instrucoes_bancarias()` | Gravação de Instruções Bancárias |
+| `criar_lancamentos_de_tesourarias()` | Gravação de Lançamentos de Tesourarias |
+| `buscar_lancamentos_de_tesouraria()` | Busca de Lançamentos de Tesouraria |
+| `obter_lancamento_de_tesouraria()` | Leitura de Lançamento de Tesouraria pelo ID |
+| `atualizar_lancamentos_de_tesouraria()` | Atualização de Lançamentos de Tesouraria |
+| `excluir_lancamento_de_tesouraria()` | Exclusão de Lançamento de Tesouraria |
+| `criar_titulos_de_contas_a_pagar()` | Gravação de Títulos de Contas a Pagar |
+| `buscar_titulos_de_contas_a_pagar()` | Busca de Títulos de Contas a Pagar |
+| `obter_titulo_de_contas_a_pagar()` | Leitura de Título de Contas a Pagar pelo ID |
+| `atualizar_titulos_de_contas_a_pagar()` | Atualização de Títulos de Contas a Pagar |
+| `excluir_titulo_de_contas_a_pagar()` | Exclusão de Título de Contas a Pagar pelo ID |
+| `criar_titulos_de_contas_a_receber()` | Gravação de Títulos de Contas a Receber |
+| `buscar_titulos_de_contas_a_receber()` | Busca de Títulos de Contas a Receber |
+| `obter_titulo_de_contas_a_receber()` | Leitura de Título de Contas a Receber pelo ID |
+| `atualizar_titulos_de_contas_a_receber()` | Atualização de Títulos de Contas a Receber |
+| `excluir_titulo_de_contas_a_receber()` | Exclusão de Título de Contas a Receber pelo ID |
+
+
+### Módulo Folha (`client.folha`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `criar_admissoes_preliminares()` | Gravação de Admissões Preliminares |
+| `buscar_admissoes_preliminares()` | Busca de Admissões Preliminares |
+| `obter_admissao_preliminar()` | Leitura de Admissão Preliminar pelo ID |
+| `atualizar_admissao_preliminar()` | Atualização de Admissão Preliminar |
+| `exclusao_da_admissao_preliminar()` | Exclusão da Admissão Preliminar pelo ID |
+| `criar_afastamentos()` | Gravação de Afastamentos |
+| `buscar_afastamentos()` | Busca de Afastamentos |
+| `obter_afastamentos()` | Leitura de Afastamentos pelo ID |
+| `exclusao_do_afastamento()` | Exclusão do Afastamento pelo ID |
+| `buscar_afastamentos_2()` | Busca de Afastamentos |
+| `obter_cargos_do_tipo_cargo()` | Leitura de Cargos do tipo cargo pelo ID |
+| `buscar_cargos_do_tipo_cargo()` | Busca de Cargos do tipo cargo |
+| `obter_cbo()` | Leitura de CBO pelo ID |
+| `buscar_cbos()` | Busca de CBOs |
+| `obter_centro_de_custo_analitico()` | Leitura de Centro de Custo Analítico pelo ID |
+| `buscar_centros_de_custos_analiticos()` | Busca de Centros de Custos Analíticos |
+| `criar_conselhos()` | Gravação de Conselhos |
+| `buscar_conselhos()` | Busca de Conselhos |
+| `obter_conselho()` | Leitura de Conselho pelo ID |
+| `atualizar_conselho()` | Atualização de Conselho |
+| `obter_departamentos()` | Leitura de Departamentos pelo ID |
+| `buscar_departamento()` | Busca de Departamento |
+| `obter_empregado()` | Leitura de Empregado pelo ID |
+| `buscar_empregados()` | Busca de Empregados |
+| `obter_escala()` | Leitura de Escala pelo ID |
+| `buscar_escalas()` | Busca de Escalas |
+| `obter_cargos_do_tipo_grupo()` | Leitura de cargos do tipo grupo pelo ID |
+| `buscar_cargos_do_tipo_grupo()` | Busca de Cargos do tipo Grupo |
+| `obter_grupo_de_terceiro()` | Leitura de Grupo de Terceiro pelo ID |
+| `buscar_grupo_de_terceiros()` | Busca de Grupo de Terceiros |
+| `obter_horario()` | Leitura de Horário pelo ID |
+| `buscar_horarios()` | Busca de Horários |
+| `obter_indice_fgts()` | Leitura de Índice FGTS pelo ID |
+| `buscar_indices_fgts()` | Busca de Índices FGTS |
+| `obter_rubrica()` | Leitura de Rubrica pelo ID |
+| `buscar_rubricas()` | Busca de Rubricas |
+| `criar_rubricas_programadas()` | Gravação de Rubricas Programadas |
+| `buscar_rubricas_programadas()` | Busca de Rubricas Programadas |
+| `obter_rubrica_programada()` | Leitura de Rubrica Programada pelo ID |
+| `exclusao_da_rubrica_programada()` | Exclusão da Rubrica Programada pelo ID |
+| `leitura_do_salario_atual()` | Leitura do Salário Atual pelo ID |
+| `buscar_salarios_atuais()` | Busca de Salários Atuais |
+| `obter_sindicato_de_empregado()` | Leitura de Sindicato de Empregado pelo ID |
+| `buscar_sindicatos_de_empregados()` | Busca de Sindicatos de Empregados |
+| `obter_situacoes()` | Leitura de Situações pelo ID |
+| `buscar_situacoes()` | Busca de Situações |
+| `obter_terceiro()` | Leitura de Terceiro pelo ID |
+| `buscar_terceiros()` | Busca de Terceiros |
+| `obter_centro_de_custo_titulo()` | Leitura de Centro de Custo Título pelo ID |
+| `buscar_centros_de_custos_titulos()` | Busca de Centros de Custos Títulos |
+
+
+### Módulo Gerenciador (`client.gerenciador`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `criar_contratos()` | Gravação de Contratos |
+| `buscar_contratos()` | Busca de Contratos |
+| `obter_contrato()` | Leitura de Contrato pelo ID |
+| `atualizar_contrato()` | Atualização de Contrato |
+| `excluir_contrato()` | Exclusão de Contrato pelo ID |
+| `criar_defeitos()` | Gravação de Defeitos |
+| `buscar_defeitos()` | Busca de Defeitos |
+| `obter_defeito()` | Leitura de Defeito pelo ID |
+| `criar_equipamentos()` | Gravação de Equipamentos |
+| `buscar_equipamentos()` | Busca de Equipamentos |
+| `obter_equipamento()` | Leitura de Equipamento pelo ID |
+| `buscar_eventos_do_contrato()` | Busca de Eventos do Contrato |
+| `criar_faixas()` | Gravação de Faixas |
+| `buscar_faixas()` | Busca de Faixas |
+| `obter_faixa()` | Leitura de Faixa pelo ID |
+| `gerenciador_v1_incidencia_id()` | /api/gerenciador/v1/incidencia/{id} |
+| `gerenciador_v1_incidencia()` | /api/gerenciador/v1/incidencia |
+| `criar_marcas()` | Gravação de Marcas |
+| `buscar_marcas()` | Busca de Marcas |
+| `obter_marca()` | Leitura de Marca pelo ID |
+| `criar_medicoes()` | Gravação de Medições |
+| `buscar_medicoes()` | Busca de Medições |
+| `obter_medicao()` | Leitura de Medição pelo ID |
+| `criar_modelos()` | Gravação de Modelos |
+| `buscar_modelos()` | Busca de Modelos |
+| `obter_modelo()` | Leitura de Modelo pelo ID |
+| `obter_projeto()` | Leitura de Projeto pelo ID |
+| `buscar_projetos()` | Busca de Projetos |
+| `criar_situacao_do_equipamento()` | Gravação de Situação do Equipamento |
+| `buscar_situacoes_do_equipamento()` | Busca de Situações do Equipamento |
+| `obter_situacao_do_equipamento()` | Leitura de Situação do Equipamento pelo ID |
+| `criar_tipo()` | Gravação de Tipo |
+| `buscar_tipos()` | Busca de Tipos |
+| `obter_tipo()` | Leitura de Tipo pelo ID |
+
+
+### Módulo Producao (`client.producao`)
+
+| Método | Descrição |
+| :--- | :--- |
+| `criar_apontamento_de_processo_final()` | Gravação de Apontamento de Processo Final |
+| `criar_apontamento_de_processo_intermediario()` | Gravação de Apontamento de Processo Intermediário |
+| `obter_apontamento_efetuado()` | Leitura de Apontamento Efetuado pelo ID |
+| `buscar_apontamentos_efetuados()` | Busca de Apontamentos Efetuados |
+| `leitura_do_cadastro_de_campos_personalizados_de_desenvolvimento_de_produtos_registro()` | Leitura do cadastro de Campos Personalizados de Desenvolvimento de Produtos - Registro pelo ID. |
+| `buscar_campos_personalizados_de_desenvolvimento_de_produtos_registro()` | Busca de Campos Personalizados de Desenvolvimento de Produtos - Registro. |
+| `criar_desenvolvimentos_de_produto()` | Gravação de Desenvolvimentos de Produto |
+| `buscar_desenvolvimentos_de_produto()` | Busca de Desenvolvimentos de Produto |
+| `obter_desenvolvimento_de_produto()` | Leitura de Desenvolvimento de Produto pelo ID |
+| `obter_ensaio_de_produto()` | Leitura de Ensaio de Produto pelo ID |
+| `buscar_ensaios_de_produto()` | Busca de Ensaios de Produto |
+| `obter_escala()` | Leitura de Escala pelo ID |
+| `buscar_escalas()` | Busca de Escalas |
+| `obter_fluxo_de_processo()` | Leitura de Fluxo de Processo pelo ID |
+| `buscar_fluxos_de_processo()` | Busca de Fluxos de Processo |
+| `obter_grupo_de_escala()` | Leitura de Grupo de Escala pelo ID |
+| `buscar_grupos_de_escala()` | Busca de Grupos de Escala |
+| `obter_grupo_de_horario()` | Leitura de Grupo de Horário pelo ID |
+| `buscar_grupos_de_horario()` | Busca de Grupos de Horário |
+| `leitura_do_grupo_de_motivos_de_perdas_ou_defeitos()` | Leitura do Grupo de Motivos de Perdas ou Defeitos pelo ID. |
+| `buscar_grupo_de_motivos_de_perdas_ou_defeitos()` | Busca de Grupo de Motivos de Perdas ou Defeitos. |
+| `obter_grupo_de_projeto()` | Leitura de Grupo de Projeto pelo ID |
+| `buscar_grupos_de_projeto()` | Busca de Grupos de Projeto |
+| `obter_horario()` | Leitura de Horário pelo ID |
+| `buscar_horarios()` | Busca de Horários |
+| `obter_informacao_suplementar()` | Leitura de Informação Suplementar pelo ID. |
+| `buscar_informacao_suplementar()` | Busca de Informação Suplementar. |
+| `obter_motivos_de_perdas_ou_defeitos()` | Leitura de Motivos de Perdas ou Defeitos pelo ID. |
+| `busca_do_motivo_de_perdas_ou_defeitos()` | Busca do Motivo de Perdas ou Defeitos. |
+| `obter_necessidade_de_producao()` | Leitura de Necessidade de Produção pelo ID. |
+| `buscar_necessidades_de_producao()` | Busca de Necessidades de Produção. |
+| `obter_operacao_da_producao()` | Leitura de Operação da Produção pelo ID. |
+| `buscar_operacao_da_producao()` | Busca de Operação da Produção. |
+| `criar_ordens_de_producao()` | Gravação de Ordens de Produção |
+| `buscar_ordens_de_producao()` | Busca de Ordens de Produção |
+| `obter_ordem_de_producao()` | Leitura de Ordem de Produção pelo ID |
+| `obter_processo()` | Leitura de Processo pelo ID |
+| `buscar_processos()` | Busca de Processos |
+| `obter_projeto()` | Leitura de Projeto pelo ID |
+| `buscar_projetos()` | Busca de Projetos |
+| `obter_tipo_de_ordem_de_producao()` | Leitura de Tipo de Ordem de Produção pelo ID |
+| `buscar_tipos_de_ordem_de_producao()` | Busca de Tipos de Ordem de Produção |
+
